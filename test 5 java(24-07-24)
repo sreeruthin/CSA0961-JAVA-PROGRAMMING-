@@ -1,0 +1,92 @@
+1.Create a student attendance system to record and manage student attendance. Implement methods to mark attendance, generate attendance reports, and calculate attendance percentages.
+Methods:
+•	markAttendance(int studentId, String date, boolean isPresent)
+•	generateAttendanceReport(int studentId)
+•	calculateAttendancePercentage(int studentId)
+program:-
+import java.util.Scanner;
+
+public class SimpleAttendanceSystem {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int maxDays = 3;
+        int[] studentIds = new int[maxDays];
+        boolean[][] attendance = new boolean[maxDays][maxDays];
+
+        System.out.print("Enter the number of students: ");
+        int numStudents = scanner.nextInt();
+
+        for (int i = 0; i < numStudents; i++) {
+            System.out.print("Enter Student ID " + (i + 1) + ": ");
+            studentIds[i] = scanner.nextInt();
+        }
+
+        for (int i = 0; i < numStudents; i++) {
+            System.out.println("Enter attendance for Student ID " + studentIds[i] + ":");
+            for (int j = 0; j < maxDays; j++) {
+                System.out.print("Day " + (j + 1) + " (1 for present, 0 for absent): ");
+                attendance[i][j] = scanner.nextInt() == 1;
+            }
+        }
+
+        for (int i = 0; i < numStudents; i++) {
+            int presentClasses = 0;
+            for (int j = 0; j < maxDays; j++) {
+                if (attendance[i][j]) {
+                    presentClasses++;
+                }
+            }
+            double attendancePercentage = (double) presentClasses / maxDays * 100;
+            System.out.println("Attendance for Student ID " + studentIds[i]);
+            System.out.println("Attendance Percentage: " + attendancePercentage + "%");
+        }
+    }
+}
+output:-
+Enter the number of students: 2
+Enter Student ID 1: 121
+Enter Student ID 2: 122
+Enter attendance for Student ID 121:
+Day 1 (1 for present, 0 for absent): 1
+Day 2 (1 for present, 0 for absent): 1
+Day 3 (1 for present, 0 for absent): 0
+Enter attendance for Student ID 122:
+Day 1 (1 for present, 0 for absent): 1
+Day 2 (1 for present, 0 for absent): 1
+Day 3 (1 for present, 0 for absent): 1
+Attendance for Student ID 121
+Attendance Percentage: 66.66666666666666%
+Attendance for Student ID 122
+Attendance Percentage: 100.0%
+2. Develop a weather forecast application that fetches and displays weather information. Implement methods to get current weather, forecast for the week, and display weather details.
+Methods:
+•	getCurrentWeather(String location)
+•	getWeeklyForecast(String location)
+•	displayWeatherDetails(String location)
+program:-
+import java.util.Scanner;
+
+public class WeatherForecastApp {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter your location (city or zip code): ");
+        String location = scanner.nextLine();
+
+        String currentWeather = getCurrentWeather(location);
+        System.out.println("Current Weather for " + location + ": " + currentWeather);
+
+        String weeklyForecast = getWeeklyForecast(location);
+        System.out.println("Weekly Forecast for " + location + ":");
+        System.out.println(weeklyForecast);
+    }
+
+    private static String getCurrentWeather(String location) {
+        return "Sunny, 25°C";
+    }
+
+    private static String getWeeklyForecast(String location) {
+        return "Monday: Sunny\nTuesday: Cloudy\nWednesday: Showers\nThursday: Clear skies\nFriday: Partly cloudy";
+    }
+}
